@@ -80,7 +80,7 @@ struct Index {
   private getHeaders(): Record<string, string> {
     return {
       "AccessToken": this.Token,
-      "Content-Type": "application/json"
+      //"Content-Type": "application/json"
     };
   }
 
