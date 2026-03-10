@@ -80,7 +80,6 @@ struct Index {
   private getHeaders(): Record<string, string> {
     return {
       "AccessToken": this.Token,
-      //"Content-Type": "application/json"
     };
   }
 
@@ -89,16 +88,15 @@ struct Index {
     if (!this.Token) {
       await this.login();
     }
-
-    const httpqingqiu = http.createHttp();
-    const dataUrl = `${this.api_url}/Devices/${this.shebeiID}`;
-    const response = await (httpqingqiu.request(
-      dataUrl,
+    const httpqq = http.createHttp();
+    const dataurl = `${this.api_url}/Devices/${this.shebeiID}`;
+    const response = await (httpqq.request(
+      dataurl,
       {
         method: http.RequestMethod.GET,
-        header: this.getHeaders(),
-        connectTimeout: 8000,
-        readTimeout: 8000
+        header: this.getHeaders()
+        //connectTimeout: 8000,
+        //readTimeout: 8000
       }
     ) as Promise<http.HttpResponse>);
 
@@ -123,7 +121,7 @@ struct Index {
     this.shidu = `${sd.toFixed(2)}%`;
     this.lianjie = "正常";
 
-    httpqingqiu.destroy();
+    httpqq.destroy();
   }
 
   toggleReading(): void {
