@@ -77,28 +77,25 @@ struct Index {
 
   }
 
-  private gethd(): Record<string,string>{
-    return {
-      "AccessToken": this.Token,
+  private gethq ():Record<string, string> {
+    return{
+      "AccessToken":this.Token,
     };
   }
 
-  private async getcgq(): Promise<void> {
-
+  private async getcgq ():Promise<void>{
     if (!this.Token) {
       await this.login();
     }
     const httpqq = http.createHttp();
-    const dataurl = `${this.api_url}/Devices/${this.shebeiID}`;
+    const datau = `${this.api_url}/Devices/${this.shebeiID}`;
     const response = await (httpqq.request(
-      dataurl,
+      datau,
       {
         method: http.RequestMethod.GET,
-        header: this.gethd()
-        //connectTimeout: 8000,
-        //readTimeout: 8000
+        header: this.gethq()
       }
-    ) as Promise<http.HttpResponse>);
+    )as Promise<http.HttpResponse>);
 
     const data = JSON.parse(response.result.toString()) as shebeixiangying;
     const cgq = data.ResultObj?.Sensors || [];
@@ -108,12 +105,12 @@ struct Index {
 
     for (const sensor of cgq) {
       const api = sensor.ApiTag;
-      const value = sensor.Value || 0;
+      const zhi = sensor.Value || 0;
 
       if (api == "Temperature") {
-        wd = parseFloat(value as string);
+        wd = parseFloat(zhi as string);
       } else if (api == "Humidity") {
-        sd = parseFloat(value as string);
+        sd = parseFloat(zhi as string);
       }
     }
 
