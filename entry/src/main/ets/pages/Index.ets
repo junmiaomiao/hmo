@@ -47,8 +47,8 @@ struct Index {
   private Token: string = "";
 
   private async login(): Promise<boolean> {
-    const httpqingqiu = http.createHttp();
-    const dengluUrl = `${this.api_url}/users/login`;
+    const httpqq = http.createHttp();
+    const dlu = `${this.api_url}/users/login`;
 
     const load: LoginPayload = {
       "Account": this.user,
@@ -57,8 +57,8 @@ struct Index {
     };
     const httptou: Record<string, string> = {};
 
-    const response = await (httpqingqiu.request(
-      dengluUrl,
+    const response = await (httpqq.request(
+      dlu,
       {
         method: http.RequestMethod.POST,
         header: httptou,
@@ -68,7 +68,7 @@ struct Index {
 
     const data = JSON.parse(response.result.toString()) as dengluxiangying;
     this.Token = data.ResultObj?.AccessToken || "";
-    httpqingqiu.destroy();
+    httpqq.destroy();
     return this.Token !== "";
 
   }
