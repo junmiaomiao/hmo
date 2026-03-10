@@ -77,13 +77,13 @@ struct Index {
 
   }
 
-  private getHeaders(): Record<string, string> {
+  private gethd(): Record<string,string>{
     return {
       "AccessToken": this.Token,
     };
   }
 
-  private async getSensorData(): Promise<void> {
+  private async getcgq(): Promise<void> {
 
     if (!this.Token) {
       await this.login();
@@ -94,25 +94,25 @@ struct Index {
       dataurl,
       {
         method: http.RequestMethod.GET,
-        header: this.getHeaders()
+        header: this.gethd()
         //connectTimeout: 8000,
         //readTimeout: 8000
       }
     ) as Promise<http.HttpResponse>);
 
     const data = JSON.parse(response.result.toString()) as shebeixiangying;
-    const sensors = data.ResultObj?.Sensors || [];
+    const cgq = data.ResultObj?.Sensors || [];
 
     let wd = 0;
     let sd = 0;
 
-    for (const sensor of sensors) {
-      const apiTag = sensor.ApiTag;
+    for (const sensor of cgq) {
+      const api = sensor.ApiTag;
       const value = sensor.Value || 0;
 
-      if (apiTag == "Temperature") {
+      if (api == "Temperature") {
         wd = parseFloat(value as string);
-      } else if (apiTag == "Humidity") {
+      } else if (api == "Humidity") {
         sd = parseFloat(value as string);
       }
     }
@@ -129,7 +129,7 @@ struct Index {
       this.isReading = true;
       this.anniuText = "停止";
       this.timerId = setInterval(async () => {
-        await this.getSensorData();
+        await this.getcgq();
       }, 1000);
     } else {
       this.isReading = false;
