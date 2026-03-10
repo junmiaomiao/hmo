@@ -47,26 +47,22 @@ struct Index {
   private Token: string = "";
 
   private async login(): Promise<boolean> {
-    //try {
     const httpqingqiu = http.createHttp();
     const dengluUrl = `${this.api_url}/users/login`;
-    // 使用已定义的接口作为类型
+
     const load: LoginPayload = {
       "Account": this.user,
       "Password": this.mima,
       "IsRememberMe": true
     };
-    const httptou: Record<string, string> = { "Content-Type": "application/json" };
+    const httptou: Record<string, string> = {};
 
-    // 4. 显式断言 request 返回类型
     const response = await (httpqingqiu.request(
       dengluUrl,
       {
         method: http.RequestMethod.POST,
         header: httptou,
-        extraData: JSON.stringify(load),
-        connectTimeout: 10000,
-        readTimeout: 10000
+        extraData: JSON.stringify(load)
       }
     ) as Promise<http.HttpResponse>);
 
@@ -89,7 +85,7 @@ struct Index {
     }
     const httpqq = http.createHttp();
     const datau = `${this.api_url}/Devices/${this.shebeiID}`;
-    const response = await (httpqq.request(
+    const xy = await (httpqq.request(
       datau,
       {
         method: http.RequestMethod.GET,
@@ -97,7 +93,7 @@ struct Index {
       }
     )as Promise<http.HttpResponse>);
 
-    const data = JSON.parse(response.result.toString()) as shebeixiangying;
+    const data = JSON.parse(xy.result.toString()) as shebeixiangying;
     const cgq = data.ResultObj?.Sensors || [];
 
     let wd = 0;
@@ -107,9 +103,9 @@ struct Index {
       const api = sensor.ApiTag;
       const zhi = sensor.Value || 0;
 
-      if (api == "Temperature") {
+      if (api == "wd") {
         wd = parseFloat(zhi as string);
-      } else if (api == "Humidity") {
+      } else if (api == "wsd") {
         sd = parseFloat(zhi as string);
       }
     }
