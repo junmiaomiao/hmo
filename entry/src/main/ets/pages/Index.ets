@@ -46,6 +46,7 @@ struct Index {
   private shebeiID: string = "1415409";
   private Token: string = "";
 
+  
   private async login(): Promise<boolean> {
     const httpqq = http.createHttp();
     const dlu = `${this.api_url}/users/login`;
@@ -57,7 +58,7 @@ struct Index {
     };
     const httptou: Record<string, string> = {};
 
-    const response = await (httpqq.request(
+    const xy = await (httpqq.request(
       dlu,
       {
         method: http.RequestMethod.POST,
@@ -66,11 +67,10 @@ struct Index {
       }
     ) as Promise<http.HttpResponse>);
 
-    const data = JSON.parse(response.result.toString()) as dengluxiangying;
+    const data = JSON.parse(xy.result.toString()) as dengluxiangying;
     this.Token = data.ResultObj?.AccessToken || "";
     httpqq.destroy();
     return this.Token !== "";
-
   }
 
   private gethq ():Record<string, string> {
