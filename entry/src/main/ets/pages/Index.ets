@@ -51,7 +51,7 @@ struct Index {
     const httpqq = http.createHttp();
     const dlu = `${this.api_url}/users/login`;
 
-    const load: LoginPayload = {
+    const DL: LoginPayload = {
       "Account": this.user,
       "Password": this.mima,
       "IsRememberMe": true
@@ -63,7 +63,7 @@ struct Index {
       {
         method: http.RequestMethod.POST,
         header: httptou,
-        extraData: JSON.stringify(load)
+        extraData: JSON.stringify(DL)
       }
     ) as Promise<http.HttpResponse>);
 
